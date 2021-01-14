@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boggle Game</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header><h1>Boggle Game</h1></header>
+    <div id="boggle">
+        {% block content %}
+        <div class="container" class="board">
+            {% for row in board %}
+            <div class="wrapper">
+                {% for word in row %}
+                <div class="box" href="">{{word}}</div>
+                {% endfor%}
+            </div> 
+            
+            {% endfor %}
+        </div>
+        
+       <div class="row">
+           <p class="">Score: <b class="score">0</b></p>
+           <p class="">Highest Score: <b class="highest">{{ highscore }}</b> in {{ nplays }}</p>
+           
+       </div>
+       <div><p class="item">Seconds left: <b class="timer"></b></p></div>
+        <form class="add-word" method="POST" >
+            <p>
+                <input type="text" name="word" class="word"autofocus>
+                <button>Guess!</button>
+            </p>
+        </form>
+        {% endblock %}
+        <p class="msg">
+            <!-- our JS will put messages here dynamically -->
+          </p>
+    
+          <ul class="words">
+            <!-- our JS will words here as they score -->   
+          </ul>
+    </div>
+    <script src="http://unpkg.com/jquery"></script>
+    <script src="https://unpkg.com/axios@0.19.0/dist/axios.js"></script>
+    <script src="/static/app.js"></script>
+    <script>
+        let game = new BoggleGame("boggle", 60);
+      </script>
+</body>
+</html>
